@@ -1,4 +1,4 @@
-package com.igor040897.vkgroup;
+package com.igor040897.vkgroup.ui.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +8,13 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.igor040897.vkgroup.CurrentUser;
+import com.igor040897.vkgroup.MyApplication;
+import com.igor040897.vkgroup.R;
 import com.igor040897.vkgroup.consts.ApiConstants;
 import com.igor040897.vkgroup.mvp.presenter.MainPresenter;
 import com.igor040897.vkgroup.mvp.view.MainView;
+import com.igor040897.vkgroup.ui.fragment.NewFeedFragment;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
@@ -19,7 +23,7 @@ import com.vk.sdk.util.VKUtil;
 
 import java.util.Arrays;
 
-public class MainActivity extends MvpAppCompatActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainView {
 
     @InjectPresenter
     MainPresenter mainPresenter;
@@ -27,9 +31,13 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        MyApplication.getApplicationComponent().inject(this);
         mainPresenter.checkAuth();
+    }
+
+    @Override
+    protected int getMainContentLayout() {
+        return R.layout.activity_main;
     }
 
     @Override
@@ -57,6 +65,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void signedId() {
-        Toast.makeText(this, "Current user id: " + CurrentUser.getId(), Toast.LENGTH_LONG);
+        Toast.makeText(this, "Current user id: " + CurrentUser.getId(), Toast.LENGTH_LONG).show();
+        setContent(new NewFeedFragment());
     }
 }
