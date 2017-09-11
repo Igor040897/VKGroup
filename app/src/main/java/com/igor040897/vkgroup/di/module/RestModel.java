@@ -29,6 +29,6 @@ public class RestModel {
     @Singleton
     @Provides
     public WallApi provideWallApi(){
-        return restClient.createServise(WallApi.class);
+        return restClient.createService(WallApi.class);
     }
 }

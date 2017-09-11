@@ -19,7 +19,7 @@ public class RestClient {
                 .build();
     }
 
-    public <S> S createServise(Class<S> serviceClass){
+    public <S> S createService(Class<S> serviceClass) {
         return retrofit.create(serviceClass);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
  * Created by fanre on 8/21/2017.
  */
 
-public class BaseItemResonse<T> {
+public class BaseItemResponse<T> {
     public Integer count;
     public List<T> items = new ArrayList<>();
 
